@@ -9,7 +9,7 @@ namespace FbxExporterExtend
     {
         public abstract Mesh GenerateFbxMesh();
 
-        public virtual Mesh GenerateMeshForPoints(Vector3[] points)
+        public virtual Mesh GenerateMeshForPoints(Vector3[] points, Vector3[] normals = null)
         {
             int vertexCount = points.Length;
             int triCount = Mathf.CeilToInt(vertexCount / 3.0f) * 3;
@@ -24,6 +24,8 @@ namespace FbxExporterExtend
             Mesh mesh = new Mesh();
             mesh.triangles = new int[0];
             mesh.vertices = points;
+            if (normals != null)
+                mesh.normals = normals;
             mesh.triangles = triangles;
             mesh.name = gameObject.name;
             return mesh;
