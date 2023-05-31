@@ -32,6 +32,17 @@ namespace FbxExporterExtend
             {
                 case ExportType.Resample:
                     {
+                        const int maxPointCount = 10000;
+
+                        float t = 0;
+                        int failSafe = 0;
+                        while (t < 1.0f && failSafe < maxPointCount)
+                        {
+                            spline.GetPointAtLinearDistance(t, resampleDistance, out t);
+                            failSafe++;
+                            vertices.Add(spline.EvaluatePosition(t));
+                        }
+
                         for (int i = 0; i < spline.Count; i++)
                             vertices.Add(spline[i].Position);
                     }

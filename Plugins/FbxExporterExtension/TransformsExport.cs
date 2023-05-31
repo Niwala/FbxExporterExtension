@@ -6,6 +6,8 @@ namespace FbxExporterExtend
 {
     public class TransformsExport : PointCloudExport
     {
+        public ExportMethod method;
+
         public override Mesh GenerateFbxMesh()
         {
             Vector3[] positions = new Vector3[transform.childCount];
@@ -19,6 +21,12 @@ namespace FbxExporterExtend
             }
 
             return GenerateMeshForPoints(positions, normals);
+        }
+
+        public enum ExportMethod
+        {
+            All,
+            PivotOnly
         }
     }
 }
